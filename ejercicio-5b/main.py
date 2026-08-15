@@ -13,4 +13,3 @@ if __name__ == "__main__":
 
     if intento == 3:
         print("Intentos terminados. Cerrando...")
-    
