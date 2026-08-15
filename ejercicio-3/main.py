@@ -1,5 +1,3 @@
-
-
 if __name__ == "__main__":
     costoPasaje = int(input("Ingrese el costo del pasaje: "))
     costoAlojamiento = int(input("Ingrese el precio por noche en el alojamiento: "))
