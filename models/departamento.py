@@ -1,10 +1,3 @@
-""" 1. Crear un nuevo modelo Departamento (id, nombre).
-2. Modificar el modelo Profesor para agregarle una clave
-foránea departamento_id.
-3. Utilizar relationship en el modelo Departamento para
-acceder a la lista de sus profesores.
- """
-
 from database.base import Base
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship

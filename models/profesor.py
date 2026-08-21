@@ -16,3 +16,6 @@ class Profesor(Base):
 
     #Relacion ORM para navegacion con Departamento
     departamento: Mapped["Departamento"] = relationship(back_populates="profesores")
+
+    #Relacion con Cursos
+    cursos: Mapped[list["Curso"]] = relationship(back_populates="profesor")

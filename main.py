@@ -7,24 +7,41 @@ from sqlalchemy import select
 Base.metadata.create_all(engine)
 
 with Session(engine) as session:
-    """    
-    profesor1 = Profesor(
-        nombre="Juano",
-        email="juan@gmail.com"
+    """ 
+    departamento1 = models.Departamento(
+        nombre="Ingenieria"
     )
 
-    profesor2 = Profesor(
-        nombre="Santiago",
-        email="santiago@gmail.com"
-    )
-
-    session.add(profesor1)
-    session.add(profesor2)
-
+    session.add(departamento1)
     session.commit()
+
+
+    profesor1 = models.Profesor(
+        nombre="Juano",
+        email="juan@gmail.com",
+        departamento_id=1
+    )
+
+    profesor2 = models.Profesor(
+        nombre="Santiago",
+        email="santiago@gmail.com",
+        departamento_id=1
+    )
+
+    session.add_all([
+        profesor1,
+        profesor2
+    ])
+
+    session.commit() 
     """
-    stmt = select(models.Profesor)
-    profesor1 = session.scalars(stmt).first()
-    print(profesor1.id)
-    print(profesor1.nombre)
-    print(profesor1.email)
+    departamentos = session.scalars(
+        select(models.Departamento)
+    ).all()
+
+    for departamento in departamentos:
+        print(f"Departamento: {departamento.nombre}")
+
+        for profesor in departamento.profesores:
+            print(f"Profesor: {profesor.nombre} | ID: {profesor.id}")
+    
