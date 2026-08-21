@@ -1,6 +1,6 @@
+import models
 from database.connection import engine
 from database.base import Base
-from models.profesor import Profesor
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
@@ -23,7 +23,7 @@ with Session(engine) as session:
 
     session.commit()
     """
-    stmt = select(Profesor)
+    stmt = select(models.Profesor)
     profesor1 = session.scalars(stmt).first()
     print(profesor1.id)
     print(profesor1.nombre)
