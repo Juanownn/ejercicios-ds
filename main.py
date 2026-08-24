@@ -7,7 +7,7 @@ from sqlalchemy import select
 Base.metadata.create_all(engine)
 
 with Session(engine) as session:
-    """ 
+    """  
     departamento1 = models.Departamento(
         nombre="Ingenieria"
     )
@@ -104,8 +104,42 @@ with Session(engine) as session:
         estudiante3
     ])
     session.commit()
-    """ 
 
+    inscripcion1 = models.Inscripcion(
+        estudiante_id=estudiante1.id,
+        curso_id=curso1.id,
+        calificacion_final=9
+    )
+
+    inscripcion2 = models.Inscripcion(
+            estudiante_id=estudiante1.id,
+            curso_id=curso2.id,
+            calificacion_final=8
+    )
+     
+    inscripcion3 = models.Inscripcion(
+                estudiante_id=estudiante1.id,
+                curso_id=curso3.id,
+                calificacion_final=9
+    )
+
+    session.add_all([
+        inscripcion1,
+        inscripcion2,
+        inscripcion3
+    ])
+    session.commit()
+    """
+
+    est1 = session.scalars(
+        select(models.Estudiante)
+    ).first()
+    acum = 0
+    for inscripcion in est1.inscripciones:
+        acum+=inscripcion.calificacion_final
+    prom=acum/len(est1.inscripciones)
+    print(f"El promedio de {est1.nombre} es: {prom:.2f}")
+    """ 
     departamentos = session.scalars(
         select(models.Departamento)
     ).all()
@@ -122,4 +156,4 @@ with Session(engine) as session:
                     print("Clases vistas:")
                     for clase in curso.clases:
                         print(f"Tema: {clase.tema} que duro: {clase.duracion_minutos} min")
-    
+     """
