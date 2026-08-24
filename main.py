@@ -34,8 +34,7 @@ with Session(engine) as session:
     ])
 
     session.commit() 
-    """
-    """ 
+    
     curso1 = models.Curso(
         titulo="Algebra",
         creditos=100,
@@ -85,7 +84,27 @@ with Session(engine) as session:
     ])
 
     session.commit()
-    """
+    
+    estudiante1 = models.Estudiante(
+        nombre="Pepito",
+        legajo=32
+    )
+    estudiante2 = models.Estudiante(
+        nombre="Pablito",
+        legajo=123
+    )
+    estudiante3 = models.Estudiante(
+        nombre="Lucio",
+        legajo=34
+    )
+
+    session.add_all([
+        estudiante1,
+        estudiante2,
+        estudiante3
+    ])
+    session.commit()
+    """ 
 
     departamentos = session.scalars(
         select(models.Departamento)
@@ -99,7 +118,8 @@ with Session(engine) as session:
             print("Cursos dictados: ")
             for curso in profesor.cursos:
                 print(curso.titulo)
-                print("Clases vistas:")
-                for clase in curso.clases:
-                    print(f"Tema: {clase.tema} que duro: {clase.duracion_minutos} min")
+                if len(curso.clases) > 0:
+                    print("Clases vistas:")
+                    for clase in curso.clases:
+                        print(f"Tema: {clase.tema} que duro: {clase.duracion_minutos} min")
     
